@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh_CN">
+	<meta charset="GBK">
+	<title>用户登录</title>
+	<script src="/common/jquery-1.11.0.min.js" charset="utf-8"></script>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background: #f7f3f0;
+		}
+		img {
+			border:0px;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		#login-panel {
+			width: 320px;
+			height: 255px;
+			background: url(/images/2015_2/login_bg.gif) 50% 50% no-repeat;
+			position: relative;
+			margin:14px auto 0 auto;
+			box-shadow: -3px 3px 15px 3px #333;
+		}
+
+		#login-panel .panel-unit {
+			padding: 0;
+			margin: 0;
+			border: 0;
+			position: absolute;
+			/*background: rgba(3, 3, 3, .7);*/
+			width: 270px;
+			height: 26px;
+			line-height: 26px;
+		}
+	</style>
+	<script>
+		//验证码
+		function doSubmit(){
+			if ($('#code').val()=="" || $('#userPassword').val()=="" || $('#checkcode').val()==""){
+				alert("表单信息不完整，请检查补充后重新提交");
+				return false;
+			}else{
+				$.get("/common/common_ajaxcode.action?&identifyingCard=" + $('#checkcode').val(), function (quanjubianliang) {
+					console.log("return: "+quanjubianliang);
+					if (quanjubianliang == 'ok') {
+						$("#yanzhengma").val("ok");
+						document.getElementById('form2').submit();
+					}else {
+						alert("验证码错误，请重新输入");
+					}
+				});
+			}
+
+
+		}
+		$(document).ready(function(){
+			$('#code, #userPassword').bind('focus', function(){
+				$(this).select();
+			});
+		});
+
+		$(document).ready(function(){
+			$('#userPassword').bind('focus', function(){
+				$(this).attr('type','password').val('');
+			});
+		});
+
+		var errorMessage = '${errorMessage}';
+		if (errorMessage.length>0){
+			alert(errorMessage);
+		}
+	</script>
+</head>
+<body style="background:#FFF;">
+<!-- header -->
+<#include "/WEB-INF/common/common_head_a.html" />
+<!-- /Header -->
+<div style="background:url(/images/2015_2/bg_login.jpg); width:1150px; height:863px; margin:0 auto; position:relative;">
+	<div id="login-panel" style="position:absolute; right:50px; top:30px;">
+		<form id="form2" name="form2" method="post" onsubmit="return false;" action="/user/user_login.action" style="margin: 0">
+			<input name="code" id="code" class="panel-unit" type="text" value="用户名" style="left:25px; top:46px; color:#555;"/>
+			<input name="userPassword" id="userPassword" class="panel-unit" value="密码" type="text" style="left:25px; top:92px; color:#555;"/>
+			<input class="panel-unit" type="text" name="checkcode" id="checkcode" style="left:92px; top:140px; width:93px;"/>
+
+			<div name="input2" onclick="doSubmit()" class="panel-unit" style="left: 211px; top: 215px; width: 77px; height: 34px; cursor:pointer;"></div>
+
+			<input type="hidden" name="codeType" value="account">
+			<input type="hidden" name="url" value="{base}/">
+			<input type="hidden" name="loginReferer" value="${loginReferer}">
+
+			<div class="panel-unit" style="left: 211px; top: 140px; width: 61px; height: 21px;">
+				<img src="/users/identifyingCard.jsp" alt="" onclick="this.src=this.src+'?'" style="height:26px;"/>
+			</div>
+			<div class="panel-unit" style="left: 50px; top: 212px; width: 61px; height: 21px;">
+				<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js "data-appid="101262151"<!-- data-appid="100268943"--> data-redirecturi="http://www.htyou.com/common/return.jsp" charset="utf-8"></script>
+				<span id="qqLoginBtn"></span>
+						<script type="text/javascript">
+						QC.Login({
+							btnId:"qqLoginBtn"	//插入按钮的节点id
+						});
+				</script>
+			</div>
+			<div class="panel-unit" style="left: 125px; top: 207px; width: 61px; height: 21px;">
+				<a href="/register.htm" target="_blank"><img src="/images/2015_1/reg.png" alt="" style="width:77px; height:34px;"/></a>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- Footer -->
+<div id="bootom-section" style="background:#FFF;">
+	<#include "/WEB-INF/common/common_footer.html" />
+</div>
+<!-- /Footer -->
+</body>
+</html>
