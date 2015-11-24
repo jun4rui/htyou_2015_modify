@@ -1,0 +1,712 @@
+<!-- 中间登录流程代码备份 /WEB-INF/common/userlogin.html -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=gbk"/>
+	<!--20151123需要跳过本页所以做以下修改-->
+	<!--<title>华天旅游网&#45;&#45;用户登录</title>-->
+	<script>
+		//window.location.href="tourorder_tourOrderStep3.action?gocontinue=1&tourproid=${tourproid!('')}";
+	</script>
+	<style>
+		/*
+		body {
+			display:none !important;
+			height:1px;
+			width:1px;
+			overflow:hidden;
+			color:#FFF !important;
+			background-color: #FFF !important;
+		}
+		.hotpoint-panel {
+			display:none !important;
+		}
+		*/
+	</style>
+	<!--/20151123需要跳过本页所以做以下修改-->
+
+	<!-- 公共CSS部分 Begin -->
+	<link rel="stylesheet" href="/images/v14b/common.css"/>
+	<link rel="stylesheet" type="text/css"
+	      href="${base}/css/common2.0.css"/>
+	<!-- 公共CSS部分 End -->
+
+
+	<script language="JavaScript"
+	        src="${base}/common_res/js/jquery-1.4.4.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			// alert("sfsdfdsf");
+
+		});
+
+		String.prototype.Trim = function () {
+			return this.replace(/(^\s*)|(\s*$)/g, "");
+		}
+
+		String.prototype.LTrim = function () {
+			return this.replace(/(^\s*)/g, "");
+		}
+
+		String.prototype.RTrim = function () {
+			return this.replace(/(\s*$)/g, "");
+		}
+
+		function check() {
+
+			var code = document.getElementById('username');
+			var userPassword = document.getElementById('password');
+			var faillogin = document.getElementById('faillogin');
+
+
+			if (code.value.Trim() == '') {
+
+				faillogin.innerHTML = "<img src='../images/common2/check_error.gif' /> 用户名不能为空";
+				faillogin.style.display = 'inline';
+				code.focus();
+
+			} else if (userPassword.value.Trim() == '') {
+
+
+				faillogin.innerHTML = "<img src='../images/common2/check_error.gif' /> 密码不能为空";
+				faillogin.style.display = 'inline';
+				userPassword.focus();
+
+
+			}
+
+			else {
+				$.ajax({
+					type: "GET",
+					url: '${base}/user/user_ajaxValidateUserLongin.action?codeType=account&code=' + code.value + '&userPassword=' + userPassword.value,
+					cache: false,
+					dataType: "html",
+					success: function (result) {
+						if (result == "err") {
+							faillogin.innerHTML = "<img src='../images/common2/check_error.gif' /> 账号或者密码错误，无法登录";
+							faillogin.style.display = 'inline';
+
+
+						}
+						else {
+							faillogin.style.display = 'none';
+							document.form2.submit();
+						}
+					}
+
+				});
+
+			}
+
+
+		}
+
+
+		function gohotelnovipsshbe() {
+
+			document.hbebff1.submit()
+		}
+
+	</script>
+
+
+	<script type="text/javascript">
+
+
+		function gototicketstep1() {
+
+			document.ticketorder.submit();
+
+		}
+
+
+		function gonovip1() {
+
+			document.form1.submit();
+
+		}
+
+		function gohotelnovipssssss() {
+			document.bff1.submit();
+		}
+
+
+		function gohotelnovipsshbe() {
+
+			document.hbebff1.submit()
+		}
+
+		function goVisa() {
+			document.visa.submit()
+		}
+
+
+		function gotourfillorder(towardpage) {
+			if (towardpage == 'tour')
+				document.location.href = "tourorder_tourOrderStep4.action?gocontinue=1&tourproid=${tourproid!('')}";
+			else if (towardpage == 'tour1')
+				document.location.href = "tourorder_tourOrderStep3.action?gocontinue=1&tourproid=${tourproid!('')}";
+		}
+
+	</script>
+
+
+	<style type="text/css">
+		.loginbox {
+			margin: 20px auto 100px auto;
+			width: 990px;
+			height: 325px;
+			border: 1px solid #EAEAEA;
+		}
+
+		.login {
+			float: left;
+			width: 40%;
+			position: relative;
+			height: 100%;
+			display: block;
+			background: #FCFCFC;
+		}
+
+		.login .loginhead {
+			background: url(/images/common2/login_bg.jpg) no-repeat left bottom;
+			border-bottom: 1px dashed #E7E7E7;
+			height: 100px;
+		}
+
+		.login .logincontent {
+			padding: 4px 5px 40px 5px;
+		}
+
+		.login .logincontent ul {
+			list-style-type: none;
+		}
+
+		.login .logincontent li {
+			font-size: 14px;
+			vertical-align: middle;
+			color: #333;
+			margin-top: 15px;
+		}
+
+		.logininput {
+			border: 1px solid #B0B0B0;
+			width: 240px;
+			height: 30px;
+			font-size: 18px;
+		}
+
+		.login .logincontent .pleft a {
+			color: #006AB4;
+			text-decoration: none;
+			font-size: 16px;
+			margin-left: 70px;
+		}
+
+		.login .btnbottom1 {
+			left: 60px;
+			bottom: 10px;
+			position: absolute;
+		}
+
+		.regist {
+			padding-left: 130px;
+			font-size: 14px;
+			background: url(http://www.htyou.com/images/common2/login_middle_bg.jpg) no-repeat left center;
+			float: left;
+			margin-left: 20px;
+			line-height: 30px;
+			padding-top: 30px;
+			position: relative;
+			HEIGHT: 270px;
+		}
+
+		.font1 {
+			font-weight: bold;
+			font-size: 14px;
+			color: #F00;
+		}
+
+		.regist li {
+			padding-left: 18px;
+			background: url(http://www.htyou.com/images/common2/arrow.gif) no-repeat left center;
+			line-height: 38px;
+			height: 38px;
+			margin: 0px 0px 0px 5px;
+			list-style-type: none;
+		}
+
+		.regist .btnbottom, .regist .btnbottom2 {
+			position: absolute;
+			left: 215px;
+			bottom: 0px;
+		}
+	</style>
+<body>
+<!-- strat-引用头部 -->
+<#include "/WEB-INF/common/common_head_a.html" />
+<!-- end - 引用头部 -->
+
+
+<!-- strat 中间表单信息  -->
+<!--登录功能界面-->
+
+
+<form id="form2" name="form2" method="post" onsubmit="return false;"
+      action="../../htbbs/logging.jsp?action=login" style="margin: 0">
+
+	<div class="loginbox">
+		<#assign css="" />
+		<#if logintype??>
+			<#else>
+				<#assign
+						css="padding-left:90px" />
+		</#if>
+		<div class="login" style="">
+			<div class="loginhead"></div>
+			<div class="logincontent">
+				<ul>
+					<li>
+						<label>
+							<@s.text name="zhang"/>&nbsp;&nbsp;&nbsp;&nbsp;<@s.text
+							name="hao"/>：
+						</label>
+						<input name="username" id="username" type="text"
+						       class="logininput"/>
+					</li>
+					<li>
+						<label>
+							<@s.text name="mi"/>&nbsp;&nbsp;&nbsp;&nbsp;<@s.text
+							name="ma"/>：
+						</label>
+						<input class="logininput" name="password" id="password"
+						       type="password"/>
+
+						<input type="hidden" name="formhash" value="78c4adbc"/>
+						<input type="hidden" name="loginmode" value=""/>
+						<input type="hidden" name="questionid" value="0"/>
+						<input type="hidden" name="answer" value=""/>
+						<input type="hidden" name="styleid" value=""/>
+						<input type="hidden" name="loginsubmit" value="true"/>
+						<input type="hidden" name="cookietime" value="0"/>
+						<input type="hidden" name="fromweb" value="true"/>
+
+
+						<#if referer?? >
+							<#assign referer="${base}${referer}" />
+							<#else>
+								<#assign referer="/common/common_gotoUserClubHome.action" />
+
+						</#if>
+
+
+						<input type="hidden" name="referer" value="${referer}"/>
+
+						<input type="hidden" id="account" name="codeType"
+						       value="account"/>
+
+					</li>
+					<li class="pleft">
+						&nbsp;
+						<a href="/common/userEmailPasswordFind.jsp" target="_blank" style="font-size:12px;"><@s.text
+							name="wangjimima"/>？</a><span
+							style="padding-left: 22px; color: #FF0000; display: none; font-size:12px;"
+							id="faillogin"><img
+							src="../images/common2/check_error.gif" style="margin-bottom:-2px;"/> <@s.text
+									name="errorinfo"/>！</span>
+					</li>
+				</ul>
+			</div>
+			<#if logintype??>
+				<#else>
+					<#assign css1="padding-left:93px" />
+			</#if>
+
+			<div class="btnbottom1" style="">
+				<a class="a03" href="${base}/register.htm">
+					<img name="input3" border="0" src="../images/common2/regist.jpg"
+					     style="margin-bottom: 2px;"/> </a>
+				<input name="input2" onclick="check()" type="image"
+				       src="../images/common2/login.jpg"/>
+				<script type="text/javascript"
+				        src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100268943"
+				        data-redirecturi="http://www.htyou.com/common/return.jsp" charset="utf-8"></script>
+				<span id="qqLoginBtn"></span>
+				<script type="text/javascript">
+					QC.Login({
+						btnId: "qqLoginBtn"	//插入按钮的节点id
+					});
+				</script>
+			</div>
+		</div>
+
+
+		<!--继续预定区域开始-->
+
+		<#if logintype??>
+			<!--strat 航旅通酒店  -->
+			<#if logintype=="hotelibe" >
+				<div class="regist">
+					<span class="font1">【 <@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					&nbsp;<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+						<a href="#" onclick="gohotelnovipsshbe()"> <input name="input"
+						                                                  type="image"
+						                                                  src="../images/common2/goon.jpg"/> </a>
+					</div>
+				</div>
+			</#if>
+			<!--end  航旅通酒店  -->
+
+			<!--strat 特价酒店  -->
+			<#if logintype=="hotel" >
+				<div class="regist">
+					<span class="font1">【<@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					&nbsp;<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+
+						<a href="#" onclick="gohotelnovipssssss()"><input name="input"
+						                                                  type="image"
+						                                                  src="../images/common2/goon.jpg"/> </a>
+					</div>
+				</div>
+			</#if>
+			<!--end  特价酒店  -->
+
+
+			<#if logintype=="ibe" >
+				<div class="regist">
+					<span class="font1">【<@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					&nbsp;<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+						<a
+								href="${base}/ticketpro/ticketpro_queryZhijieTicke.action?sc=${statcity}
+
+&nc=${endcity}&date=${statdate}&type=${type}
+
+&scity=${scity}&ecity=${ecity}
+
+&fanhuidate=${fanhuidate}">
+							<img border="0" type="image" src="../images/common2/goon.jpg"/>
+						</a>
+					</div>
+				</div>
+			</#if>
+
+
+			<!--  strat特价机票 -->
+			<#if logintype=="tejia" >
+				<div class="regist">
+					<span class="font1">【<@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					&nbsp;<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+						<a href="#" onclick="gonovip1()"><img border="0" type="image"
+						                                      src="../images/common2/goon.jpg"/> </a>
+					</div>
+				</div>
+			</#if>
+			<!-- end  特价机票 -->
+
+
+			<!--  strat胜意机票信息 -->
+			<#if logintype=="ticketsy" >
+				<div class="regist">
+					<span class="font1">【<@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					&nbsp;<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+						<a href="#" onclick="gototicketstep1()"><img border="0" type="image"
+						                                             src="../images/common2/goon.jpg"/> </a>
+					</div>
+				</div>
+			</#if>
+			<!-- end  胜意机票信息 -->
+
+
+			<!--  strat 签证 -->
+
+			<#if logintype=="visa" >
+				<div class="regist">
+					<span class="font1">【<@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					&nbsp;<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+						<a href="#" onclick="goVisa()"><img border="0" type="image"
+						                                    src="../images/common2/goon.jpg"/> </a>
+					</div>
+				</div>
+			</#if>
+			<!-- end  签证 -->
+
+
+			<!--  strat 旅游 -->
+
+			<#if logintype=="tour1" >
+				<div class="regist">
+					<span class="font1">【<@s.text name="zhijieyuding"/>】</span>
+					<br/>
+					<@s.text name="tishi"/>，
+					<br/>
+					<@s.text name="tishi2"/>。
+					<br/>
+					<br/>
+					<br/>
+					<@s.text name="tishi3"/>，
+					<br/>
+					<@s.text name="tishi4"/>！
+					<div class="btnbottom2">
+						<a href="#" onClick="gotourfillorder('${logintype}')"><img
+								border="0" type="image" src="../images/common2/goon.jpg"/> </a>
+					</div>
+				</div>
+			</#if>
+			<!-- end  旅游 -->
+
+
+		</#if>
+		<!--继续预定区域结束-->
+
+		<div class="regist" align="left" style="display:none;">
+			<span class="font1">【<@s.text name="xinhuiyuanzhuce"/>】</span>
+			<br/>
+			&nbsp;<@s.text name="tishi5"/>：
+			<br/>
+			<ul>
+				<li>
+					<@s.text name="tishi6"/>
+				</li>
+				<li>
+					<@s.text name="tishi7"/>！
+				</li>
+				<li>
+					<@s.text name="tishi8"/>！
+				</li>
+			</ul>
+			<div class="btnbottom">
+				<a class="a03" href="${base}/register.htm">
+					<img name="input3" border="0" src="../images/common2/regist.jpg"
+					     style="margin-bottom: 2px;"/> </a>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+<!--登录功能界面-->
+
+<!-- end 中间表单信息  -->
+
+
+<!-- strat-引用底部 -->
+<div id="bootom-section">
+	<#include "/WEB-INF/common/common_footer.html" />
+</div>
+<!-- end - 引用底部 -->
+
+
+<!-- 机票表单提交 -->
+<#if routingType?? >
+	<#if guoneiandguoji=="1" >
+		<#assign
+				gourl="${base}/ticketpro/ticketpro_orderstep1.action" />
+	</#if>
+	<#if
+			guoneiandguoji=="2" >
+		<#assign
+				gourl="${base}/ticketpro/ticketpro_internationorderstep1.action" />
+	</#if>
+	<form id="form1" action="${gourl}" name="form1" method="post">
+
+		<#if routingType=="130401" >
+			<input type="hidden" name="hangchengType" value="single"/>
+		</#if>
+		<#if routingType=="130402" >
+			<input type="hidden" name="hangchengType" value="duo"/>
+			<input type="hidden" name="beginCityCode"/>
+		</#if>
+
+		<input type="hidden" name="zuiduantime" value="${zuiduantime!('')}"/>
+		<input type="hidden" name="zuichangtime" value="${zuichangtime!('')}"/>
+		<input type="hidden" name="timesyle" value="${timesyle!('')}"/>
+		<input type="hidden" name="passengerstype"
+		       value="${passengerstype!('')}"/>
+		<input type="hidden" name="cancelticket" value="${cancelticket!('')}"/>
+		<input type="hidden" name="changeticket" value="${changeticket!('')}"/>
+		<input type="hidden" name="reamk" value="${reamk!('')}"/>
+		<input type='hidden' name='guoneiandguoji' id="guoneiandguoji"
+		       value="${guoneiandguoji!('')}"/>
+		<input type="hidden" name=flgguo value="flgguo"/>
+		<input type="hidden" name=quanjiacangwei value="${ertongPirce!('')}"/>
+		<input type="hidden" name=Ycang value="${Ycang!('')}"/>
+		<input type="hidden" name="fanhuiDate" value="${sefanhuiDate!('')}"/>
+		<input type="hidden" name="tickettype" value="${tickettype!('')}"/>
+		<input type="hidden" name="numberID" value="${numberID!('')}"/>
+		<input type="hidden" name="singlePriceInt"
+		       value="${singlePriceInt!('')}"/>
+		<input type="hidden" name="depTime" value="${depTime!('')}"/>
+		<input type="hidden" name="fromAirportName"
+		       value="${fromAirportName!('')}"/>
+		<input type="hidden" name="aritime" value="${aritime!('')}"/>
+		<input type="hidden" name="toAirportName"
+		       value="${toAirportName!('')}"/>
+		<input type="hidden" name="airline" value="${airline!('')}"/>
+		<input type="hidden" name="planeStyle" value="${planeStyle!('')}"/>
+		<input type="hidden" name="airportTax" value="${airportTax!('')}"/>
+		<input type="hidden" name="fuelSurcharge" value="${fuelTax!('')}"/>
+		<input type="hidden" name="discountRateStr"
+		       value="${discountRateStr!('')}"/>
+		<input type="hidden" name="fromCity" value="${fromCity!('')}"/>
+		<input type="hidden" name="toCity" value="${toCity!('')}"/>
+		<input type="hidden" name="seatGrade" value="${seatGrade!('')}"/>
+		<input type="hidden" name="sendCity" value="${sendCity!('')}"/>
+		<input type="hidden" name="fromDate" value="${fromDate!('')}"/>
+		<input type="hidden" name="sailType" value="${routingType!('')}"/>
+		<input type="hidden" name="discountRate1"
+		       value="${discountRate!('')}"/>
+		<input type="hidden" name="cabinName" value="${cabinName!('')}"/>
+		<input type="hidden" name="fromCityCode" value="${fromCityCode!('')}"/>
+		<input type="hidden" name="toCityCode" value="${toCityCode!('')}"/>
+		<input type="hidden" name="routingType" value="${routingType!('')}"/>
+		<input type="hidden" name="stopNumber" value="${stopNumber!('')}"/>
+		<input type="hidden" name="discountRate" value="${discountRate!('')}"/>
+		<input type="hidden" name="type" value="autoOrder"/>
+		<input type="hidden" name="adultcount" value="${adultcount!('')}"/>
+		<input type="hidden" name="childcount" value="${childcount!('')}"/>
+		<input type="hidden" name="babyCount"/>
+		<input type="hidden" name="flg" value="2"/>
+	</form>
+</#if>
+
+
+<!-- HBE酒店会员登陆 -->
+<#if room??>
+	<form name="hbebff1"
+	      action="${base}/hotelpro/hotelpro_hotelOrder.action?flg=1"
+	      method="post">
+		<input type="hidden" name="hotel_code" value="${room.hotelCode!(" ")}" />
+		<input type="hidden" name="room_code" value="${room.roomType!(" ")}" />
+		<input type="hidden" name="checkOutDate"
+		       value="${room.checkOutDate!(" ")}" />
+		<input type="hidden" name="checkInDate" value="${room.checkInDate!(" ")}" />
+		<input type="hidden" name="roomQuantitiy" value="${room.quantity!(" ")}" />
+		<input type="hidden" name="ratePlanCode"
+		       value="${room.ratePlanCode!(" ")}" />
+		<input type="hidden" name="vendorCode" value="${room.vendorCode!(" ")}" />
+		<input type="hidden" name="cityname" value="${room.cityname!(" ")}" />
+		<input type="hidden" name="hotelname" value="${room.hotelName!(" ")}" />
+		<input type="hidden" name="h_id" value="${room.h_id!(" ")}" />
+	</form>
+</#if>
+
+
+<!-- 特价酒店会员登陆 -->
+<#if hotelstarttime??>
+	<form name="bff1"
+	      action="${base}/hotelpro/hotelpro_hotelOrder.action?flg=2"
+	      method="post">
+		<input type='hidden' name='stattime' id="starttime"
+		       value="${hotelstarttime}"/>
+		<input type='hidden' name='h_breakfast' value="${hotelh_breakfast}"/>
+		<input type='hidden' name='h_address' value="${hotelh_address}"/>
+		<input type='hidden' name='h_phone' value="${hotelh_phone}"/>
+		<input type='hidden' name='endtime' id="endtime"
+		       value="${hotelendtime}"/>
+		<input type='hidden' name='h_id' id="h_id" value="${hotelh_id}"/>
+		<input type='hidden' name='h_hotelRank' id="h_hotelRank"
+		       value="${hotelh_hotelRank}"/>
+		<input type='hidden' name='h_city' id="h_city" value="${hotelh_city}"/>
+		<input type='hidden' name='h_hotelName' id="h_hotelName"
+		       value="${hotelh_hotelName}"/>
+		<input type='hidden' name='hoursetype' id="hoursetype"
+		       value="${hotelhoursetype}"/>
+		<input type='hidden' name='price' id="price123"
+		       value="${hoteleprice}"/>
+		<input type='hidden' name='hs_id' id="hs_id" value="${hotelhs_id}"/>
+		<input type='hidden' name='intnet' id="intnet" value="${intnet}"/>
+		<input type='hidden' name='hoteltype' id="hoteltype"
+		       value="${hotelhoteltype}"/>
+	</form>
+</#if>
+
+
+<form name="visa" action="${base}/tour/visa_gotoOrder.action"
+      method="post">
+
+</form>
+
+
+<!-- 跳转机票预订第一步骤 -->
+<form name="ticketorder" action="${base}/ticketpro/ticketorder_TicketStep1.action"
+      method="post">
+
+</form>
+
+
+<script type="text/javascript"
+        src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100268943"
+        data-redirecturi="http://www.htyou.com/test/return.html" charset="utf-8"></script>
+
+
+<span id="qqLoginBtn"></span>
+<script type="text/javascript">
+	QC.Login({
+		btnId: "qqLoginBtn"	//插入按钮的节点id
+	});
+</script>
+</body>
+
+</html>
